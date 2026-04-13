@@ -49,11 +49,12 @@ Planned UserProfile features:
 - likes_acoustic
 
 Mermaid representation of data flow:
-graph TD;
-    A[User Preferences] --> B[Load Songs];
-    B --> C[Score Each Song];
-    C --> D[Rank Songs];
-    D --> E[Return Top K Recommendations];
+```mermaid
+flowchart TD
+    A[User Preferences] --> B[Load Songs]
+    B --> C[Score Each Song]
+    C --> D[Rank Songs]
+    D --> E[Return Top K Recommendations]
 
 
 ---
@@ -95,35 +96,40 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+- I tested the recommender with multiple profiles: High-Energy Pop, Chill Lofi, Deep Intense Rock, and an edge-case profile with sad mood but high energy.
+- The strongest results were for clear profiles like High-Energy Pop and Chill Lofi because the genre, mood, and energy preferences lined up well.
+- I also ran a small experiment by lowering the genre weight and increasing the energy weight. This made the recommendations more sensitive to energy and a little more varied, but it also made the system feel less tied to the user's stated genre preference.
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+### CLI Screenshots
+
+#### Original scoring results
+![Profile test original](pop-lofi-profile-test.png)
+
+![Profile test original 2](rock-sad-profile-test.png)
+
+#### Weight-change experiment
+![Profile test modified](pop-lofi-profile-test-mod.png)
+
+![Profile test modified 2](rock-sad-profile-test-mod.png)
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+This recommender only works on a small catalog of 18 songs, so its suggestions are limited by the dataset. It does not consider lyrics, listening history, artist loyalty, or context like time of day or activity. It can also over-favor genre matches, which may reduce variety and create a small filter bubble.
 
 ---
 
 ## Reflection
 
-Read and complete `model_card.md`:
+High-Energy Pop vs Chill Lofi:
+The pop profile preferred louder, more upbeat songs with higher energy and less acousticness. The chill lofi profile shifted toward softer, lower-energy, and more acoustic songs. This makes sense because the energy target and acoustic preference changed a lot.
 
-[**Model Card**](model_card.md)
+High-Energy Pop vs Deep Intense Rock:
+Both profiles liked high-energy songs, so there was some overlap in energetic tracks. The difference is that the rock profile should push rock songs higher, while the pop profile favors upbeat pop songs. This shows that genre helps separate users even when their energy preferences are similar.
 
-Write 1 to 2 paragraphs here about what you learned:
+Chill Lofi vs Deep Intense Rock:
+These profiles produced very different results. Chill lofi favored calm and acoustic tracks, while intense rock favored louder and more aggressive songs. This makes sense because the profiles differ in genre, mood, energy, and acoustic preference.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+High-Energy Pop vs Sad but High Energy:
+This comparison was interesting because both profiles liked high-energy songs, but the mood preference changed. That means some energetic songs still ranked well even when the emotional tone did not fully match. This shows that the recommender can be pulled in two directions when a profile has conflicting traits.

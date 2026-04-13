@@ -61,29 +61,19 @@ Prompts:
 
 ## 6. Limitations and Bias 
 
-Where the system struggles or behaves unfairly. 
+This recommender has a few clear limitations. The biggest one is that it can over-prioritize genre, which may push songs from the favorite genre to the top even when other songs have a better mood or energy match. 
 
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+The system also works on a very small catalog, so some genres and moods are underrepresented. Because of that, the recommender can create a small filter bubble where similar songs keep appearing and variety is limited. It also assumes music taste can be captured with only a few features, which leaves out things like lyrics, artist preference, and listening context.
 
 ---
 
 ## 7. Evaluation  
 
-How you checked whether the recommender behaved as expected. 
+I tested the recommender with several profiles: High-Energy Pop, Chill Lofi, Deep Intense Rock, and an edge-case profile with sad mood but high energy. I looked at whether the top 5 songs felt reasonable based on the profile and whether the same songs kept appearing too often.
 
-Prompts:  
+The results mostly matched my expectations. High-Energy Pop favored upbeat, energetic songs like "Sunrise City" and "Gym Hero." Chill Lofi shifted toward lower-energy and more acoustic songs, which made sense. The edge-case profile was useful because it showed how the scoring logic can struggle when mood and energy point in different directions.
 
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
+I also ran a small experiment where I reduced the genre weight and increased the energy weight. That change made the recommendations more varied and more sensitive to energy, but it also made the system feel less anchored to the user’s stated genre preference. This showed me that small weight changes can strongly affect the behavior of the recommender.
 
 ---
 

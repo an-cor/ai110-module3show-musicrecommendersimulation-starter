@@ -133,3 +133,5 @@ These profiles produced very different results. Chill lofi favored calm and acou
 
 High-Energy Pop vs Sad but High Energy:
 This comparison was interesting because both profiles liked high-energy songs, but the mood preference changed. That means some energetic songs still ranked well even when the emotional tone did not fully match. This shows that the recommender can be pulled in two directions when a profile has conflicting traits.
+
+This project showed me that even simple recommendation systems can strongly shape what users see, especially when one feature is weighted too heavily.
